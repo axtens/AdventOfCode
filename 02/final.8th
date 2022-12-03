@@ -1,0 +1,14 @@
+"input" f:slurp 
+>s s:trim
+"\r\n\r\n" s:/ \ split into elves 
+( 
+    "\r\n" s:/ \ split into meals
+    ' >n a:map \ convert to number
+    ' n:+ 0 a:reduce \ total calories
+) a:map \ apply to each elf
+' n:cmp a:sort \ sort smallest to greatest
+0 >r \ keep a total in r-stack
+( a:pop r> n:+ >r ) 3 times \ pop off three items from the high end and accrue
+r> . \ retrieve total and display
+drop \ clean up stack
+bye
