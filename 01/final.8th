@@ -1,0 +1,10 @@
+"input" f:slurp 
+>s s:trim
+"\r\n\r\n" s:/ \ split into elves 
+( 
+    "\r\n" s:/ \ split into meals
+    ' >n a:map \ convert to number
+    ' n:+ 0 a:reduce \ total calories
+) a:map \ apply to each elf
+' n:cmp a:sort \ sort smalle
+a:pop nip . cr
