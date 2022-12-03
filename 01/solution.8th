@@ -1,0 +1,24 @@
+"input" f:slurp 
+>s s:trim
+"\r\n\r\n" s:/ \ split into elves 
+( 
+    "\r\n" s:/ \ split into meals
+    ' >n a:map \ convert to number
+    ' n:+ 0 a:reduce \ total calories
+) a:map \ apply to each elf
+0 var, glutton
+0 var, intake
+a:len \ number of elves
+( 
+    I n:1- a:@ \ (i-1)th element's calories
+    dup
+    intake @ \ current max
+    n:> \ ? calories > intake
+    if I glutton ! intake ! 
+    else drop
+    then
+    
+) swap times
+"Elf: " . glutton @ . cr 
+"Calories: " . intake @ . cr
+bye
