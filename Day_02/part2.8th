@@ -16,18 +16,6 @@
 : Draw 3 ;
 : Loss 0 ;
 
-: beatsRock Paper ;
-: beatsPaper Scissors ; 
-: beatsScissors Rock ; 
-
-: drawsRock Rock ; 
-: drawsPaper Paper ;
-: drawsScissors Scissors ; 
-
-: rockBeats Scissors ; 
-: paperBeats Rock ; 
-: scissorsBeats Paper ; 
-
 : get-loser \ n -- n
     dup Rock n:= if Scissors ;then 
     dup Paper n:= if Rock ;then 
