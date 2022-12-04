@@ -1,0 +1,54 @@
+: clear-total 
+    0 >r ;
+
+: update-total \ n --
+    " Score: " . dup . cr
+    r> n:+ >r ;
+
+: display-total 
+    r> . cr ;
+
+: Rock 1 ;
+: Paper 2 ;
+: Scissors 3 ;
+
+: Win 6 ;
+: Draw 3 ;
+: Loss 0 ;
+
+: rockrock          Rock Draw       " -> My Rock Draw " . 2dup " (%d + %d) " s:strfmt . n:+ ;
+: rockpaper         Paper Win       " -> My Paper Win " . 2dup " (%d + %d) " s:strfmt . n:+ ; 
+: rockscissors      Scissors Loss   " -> My Scissors Loss " . 2dup " (%d + %d) " s:strfmt . n:+ ;
+: paperrock         Rock Loss       " -> My Rock Loss " . 2dup " (%d + %d) " s:strfmt . n:+ ;
+: paperpaper        Paper Draw      " -> My Paper Draw " . 2dup " (%d + %d) " s:strfmt . n:+ ; 
+: paperscissors     Scissors Win    " -> My Scissors Win " . 2dup " (%d + %d) " s:strfmt . n:+ ;
+: scissorsrock      Rock Win        " -> My Rock Win " . 2dup " (%d + %d) " s:strfmt . n:+ ;
+: scissorspaper     Paper Loss      " -> My Paper Loss " . 2dup " (%d + %d) " s:strfmt . n:+ ;
+: scissorsscissors  Scissors Draw   " -> My Scissors Draw " . 2dup " (%d + %d) " s:strfmt . n:+ ;
+
+: battle \ n -- n
+    dup 11 n:= if rockrock ;then
+    dup 12 n:= if rockpaper ;then
+    dup 13 n:= if rockscissors ;then
+    dup 21 n:= if paperrock ;then
+    dup 22 n:= if paperpaper ;then
+    dup 23 n:= if paperscissors ;then
+    dup 31 n:= if scissorsrock ;then
+    dup 32 n:= if scissorspaper ;then
+    dup 33 n:= if scissorsscissors ;then
+;
+
+: A "opponent plays Rock" . 1 dup " (%d) " s:strfmt . ;
+: B "opponent plays Paper" . 2 dup " (%d) " s:strfmt . ;
+: C "opponent plays Scissors" . 3 dup " (%d) " s:strfmt . ;
+
+: X " and I play Rock" .      1 dup " (%d) " s:strfmt . swap 10 n:* n:+ battle update-total drop ;
+: Y " and I play Paper" .     2 dup " (%d) " s:strfmt . swap 10 n:* n:+ battle update-total drop ;
+: Z " and I play Scissors" .  3 dup " (%d) " s:strfmt . swap 10 n:* n:+ battle update-total drop ; 
+
+-1 args dup . cr
+clear-total
+f:slurp >s s:trim "\r\n" s:/ "\n" a:join
+eval
+display-total
+bye

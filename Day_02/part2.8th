@@ -1,0 +1,58 @@
+: clear-total 
+    0 >r ;
+
+: update-total \ n --
+    " Score: " . dup . cr
+    r> n:+ >r ;
+
+: display-total 
+    r> . cr ;
+
+: Rock 1 ;
+: Paper 2 ;
+: Scissors 3 ;
+
+: Win 6 ;
+: Draw 3 ;
+: Loss 0 ;
+
+: beatsRock Paper ;
+: beatsPaper Scissors ; 
+: beatsScissors Rock ; 
+
+: drawsRock Rock ; 
+: drawsPaper Paper ;
+: drawsScissors Scissors ; 
+
+: rockBeats Scissors ; 
+: paperBeats Rock ; 
+: scissorsBeats Paper ; 
+
+: get-loser \ n -- n
+    dup Rock n:= if Scissors ;then 
+    dup Paper n:= if Rock ;then 
+    dup Scissors n:= if Paper ;then 
+;
+
+: get-beater \ n -- n
+    dup Rock n:= if Paper ;then 
+    dup Paper n:= if Scissors ;then 
+    dup Scissors n:= if Rock ;then 
+;
+
+
+: A "opponent plays Rock" . Rock  ;
+: B "opponent plays Paper" . Paper  ;
+: C "opponent plays Scissors" . Scissors  ;
+
+: Y " I need to play to draw" . dup Draw n:+ nip update-total ;
+: X " I need to play to lose" . get-loser Loss n:+ nip update-total ;
+: Z " I need to play to win" . get-beater Win n:+ nip update-total ;
+
+
+-1 args dup . cr
+clear-total
+f:slurp >s s:trim "\r\n" s:/ "\n" a:join
+eval
+display-total
+bye
