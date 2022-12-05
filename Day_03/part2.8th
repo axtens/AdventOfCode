@@ -18,4 +18,5 @@ f:slurp >s s:trim "\r\n" s:/
 a:len 3 n:/mod nip 
 ( 3 a:/ by-threes update-total ) swap times 
 display-total 
+drop
 bye
