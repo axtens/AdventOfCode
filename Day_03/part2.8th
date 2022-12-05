@@ -1,0 +1,21 @@
+"../tools.8th" f:include
+
+:  by-threes
+    0 a:@ "" s:/ swap
+    1 a:@ "" s:/ swap
+    2 a:@ "" s:/ swap drop
+    ' s:= a:intersect
+    ' s:= a:intersect
+    0 a:@
+    "Code: " . dup . 
+    as-priority
+    nip
+; 
+
+ -1 args dup . cr
+clear-total
+f:slurp >s s:trim "\r\n" s:/
+a:len 3 n:/mod nip 
+( 3 a:/ by-threes update-total ) swap times 
+display-total 
+bye

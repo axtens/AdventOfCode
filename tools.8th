@@ -1,0 +1,17 @@
+: clear-total 
+    0 >r 
+;
+
+: update-total \ n --
+    " Score: " . dup . cr
+    r> n:+ >r 
+;
+
+: display-total 
+    r> "Total: " . . cr 
+;
+    
+: as-priority \ s -- n
+    s:uc? if 0 s:@ 'A n:- 27 n:+ nip ;then
+    0 s:@ 'a n:- n:1+ nip
+;
