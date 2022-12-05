@@ -1,0 +1,33 @@
+: clear-total 
+    0 >r ;
+
+: update-total \ n --
+    " Score: " . dup . cr
+    r> n:+ >r ;
+
+: display-total 
+    r> . cr ;
+    
+: process \ s --
+    \ slice in two
+    s:len 2 n:/mod nip s:/
+    \ explode each slice
+    0 a:@ swap 1 a:@ nip
+    "" s:/ ' s:cmp a:sort swap
+    "" s:/ ' s:cmp a:sort swap
+    \ find uniques
+    ' s:= a:intersect 
+    ' s:= a:uniq
+    0 a:@ nip
+    0 s:@
+    s:uc? if 'A n:- 27 n:+ nip ;then
+    'a n:- n:1+ 
+    nip
+;
+
+ -1 args dup . cr
+clear-total
+f:slurp >s s:trim "\r\n" s:/ 
+( process update-total ) a:each!
+display-total 
+bye
