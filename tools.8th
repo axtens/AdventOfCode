@@ -15,3 +15,7 @@
     s:uc? if 0 s:@ 'A n:- 27 n:+ nip ;then
     0 s:@ 'a n:- n:1+ nip
 ;
+
+: file-as-array \ s -- a
+    f:slurp >s s:trim "\r\n" s:/
+;
