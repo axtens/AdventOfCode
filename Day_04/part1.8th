@@ -1,0 +1,13 @@
+: process-range-pairs \ s -- n
+    
+    ' n:= a:intersect
+    intersection-equal-to-shortest-range?
+    if else then
+;
+
+-1 args dup . cr
+clear-total
+file-as-array
+( process-range-pairs update-total ) a:each!
+display-total 
+bye
